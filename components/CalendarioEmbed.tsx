@@ -1,5 +1,6 @@
 "use client";
 
+import { SegmentedControl, SegmentedControlItem } from "@astryxdesign/core/SegmentedControl";
 import { useState } from "react";
 import { calendarioGoogle } from "@/lib/data";
 
@@ -31,18 +32,10 @@ export default function CalendarioEmbed() {
 
   return (
     <>
-      <div className="flex gap-2 mb-4">
-        {vistas.map((v) => (
-          <button
-            key={v.id}
-            onClick={() => setVista(v.id)}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition cursor-pointer ${
-              vista === v.id ? "bg-accent text-background" : "bg-surface-2 text-muted hover:text-foreground border border-line"
-            }`}
-          >
-            {v.nome}
-          </button>
-        ))}
+      <div className="mb-4">
+        <SegmentedControl value={vista} onChange={setVista} label="Vista do calendário">
+          {vistas.map(({ id, nome }) => <SegmentedControlItem key={id} value={id} label={nome} />)}
+        </SegmentedControl>
       </div>
       <div className="rounded-[1.75rem] overflow-hidden border border-line bg-white">
         <iframe

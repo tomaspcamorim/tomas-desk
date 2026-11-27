@@ -6,27 +6,59 @@ export type Tipo = "escola" | "treino" | "jogo" | "outro";
 
 export type Evento = { hora: string; fim?: string; titulo: string; tipo: Tipo; local?: string };
 
-// Horário semanal. 0 = Domingo, 1 = Segunda ... 6 = Sábado
 // (EXEMPLO: troca pelos horários reais)
+// Horário da escola: EBS Carolina Michaëlis (Agrupamento de Escolas Carolina Michaëlis, Porto)
+const D = {
+  EDF: "Educação Física", EDM: "Educação Musical", MAT: "Matemática", POR: "Português",
+  ING: "Inglês", CNT: "Ciências Naturais", HGP: "História e Geografia de Portugal",
+  EDV: "Educação Visual", ETL: "Educação Tecnológica", EMR: "Educação Moral e Religiosa",
+  CID: "Cidadania / TIC",
+};
+const aula = (hora: string, fim: string, d: keyof typeof D, sala: string): Evento => ({
+  hora, fim, titulo: D[d], tipo: "escola", local: `Sala ${sala}`,
+});
+const treinoOM = (fim: string): Evento => ({ hora: "19:00", fim, titulo: "Treino LSC", tipo: "treino", local: "Oscar Marques" });
+const treinoPer: Evento = { hora: "19:00", fim: "20:00", titulo: "Treino LSC", tipo: "treino", local: "Perafita" };
+
 // Horário semanal. 0 = Domingo, 1 = Segunda ... 6 = Sábado
 export const horarioSemanal: Record<number, Evento[]> = {
   1: [
-    { hora: "08:30", titulo: "Escola", tipo: "escola" }, // EXEMPLO: confirmar horário
-    { hora: "19:00", fim: "20:15", titulo: "Treino LSC", tipo: "treino", local: "Oscar Marques" },
+    aula("08:10", "09:55", "EDF", "GIMC"),
+    aula("10:15", "11:05", "EDM", "0.01"),
+    aula("11:15", "13:00", "MAT", "0.05"),
+    treinoOM("20:15"),
   ],
   2: [
-    { hora: "08:30", titulo: "Escola", tipo: "escola" },
-    { hora: "19:00", fim: "20:00", titulo: "Treino LSC", tipo: "treino", local: "Perafita" },
+    aula("08:10", "09:55", "POR", "0.05"),
+    aula("10:15", "11:05", "CNT", "0.05"),
+    aula("11:15", "12:05", "HGP", "0.05"),
+    aula("13:10", "14:00", "ING", "0.05"),
+    aula("14:10", "15:00", "MAT", "0.05"),
+    treinoPer,
   ],
   3: [
-    { hora: "08:30", titulo: "Escola", tipo: "escola" },
-    { hora: "19:00", fim: "20:00", titulo: "Treino LSC", tipo: "treino", local: "Perafita" },
+    aula("08:10", "09:00", "MAT", "0.05"),
+    aula("09:05", "09:55", "ING", "0.05"),
+    aula("10:15", "11:05", "POR", "0.06"),
+    aula("11:15", "13:00", "EDV", "2.12"),
+    aula("15:10", "16:00", "EMR", "0.21"),
+    treinoPer,
   ],
   4: [
-    { hora: "08:30", titulo: "Escola", tipo: "escola" },
-    { hora: "19:00", fim: "20:15", titulo: "Treino LSC", tipo: "treino", local: "Oscar Marques" },
+    aula("08:10", "09:00", "EDF", "GIMC"),
+    aula("09:05", "09:55", "POR", "0.05"),
+    aula("10:15", "12:05", "ETL", "2.12"),
+    aula("13:10", "14:00", "CNT", "0.05"),
+    aula("14:10", "15:00", "HGP", "0.05"),
+    treinoOM("20:15"),
   ],
-  5: [{ hora: "08:30", titulo: "Escola", tipo: "escola" }],
+  5: [
+    aula("08:10", "09:00", "ING", "0.05"),
+    aula("09:05", "09:55", "MAT", "0.05"),
+    aula("10:15", "11:05", "POR", "0.05"),
+    aula("11:15", "12:05", "CID", "0.22 / E0.2"),
+    aula("12:10", "13:00", "EDM", "0.01"),
+  ],
   6: [],
   0: [],
 };

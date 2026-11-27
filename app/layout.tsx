@@ -1,21 +1,8 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Outfit } from "next/font/google";
 import "./globals.css";
+import AstryxProvider from "@/components/AstryxProvider";
+import Navegacao from "@/components/Navegacao";
 import { AgentationProvider } from "@/components/AgentationProvider";
-
-const barlow = Barlow_Condensed({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Casa do Tomás",
@@ -28,9 +15,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className={`${barlow.variable} ${outfit.variable}`}>
+    <html lang="pt" data-theme="dark" data-astryx-theme="neutral">
       <body className="antialiased">
-        {children}
+        <AstryxProvider>
+          <div className="app-shell">
+            <Navegacao />
+            <div className="app-content">{children}</div>
+          </div>
+        </AstryxProvider>
         <AgentationProvider />
       </body>
     </html>

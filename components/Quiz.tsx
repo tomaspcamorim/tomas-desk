@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@astryxdesign/core/Button";
+import { Card } from "@astryxdesign/core/Card";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Teste } from "@/lib/data";
@@ -51,7 +53,7 @@ export default function Quiz({ teste }: { teste: Teste }) {
   if (fim) {
     const perfeito = pontos === total;
     return (
-      <div className="rounded-3xl bg-surface border border-line p-8 text-center">
+      <Card padding={6} className="text-center">
         <div className="text-6xl">{perfeito ? "🏆" : pontos >= total / 2 ? "👏" : "💪"}</div>
         <h2 className="display text-6xl mt-4">
           {pontos} / {total}
@@ -61,19 +63,17 @@ export default function Quiz({ teste }: { teste: Teste }) {
         </p>
         <p className="text-accent mt-1">Recorde: {recorde ?? pontos} / {total}</p>
         <div className="mt-6 flex justify-center gap-3">
-          <button onClick={reiniciar} className="rounded-full bg-accent text-background font-bold px-6 py-3 cursor-pointer">
-            Tentar outra vez
-          </button>
+          <Button label="Tentar outra vez" variant="primary" onClick={reiniciar} />
           <Link href="/testes" className="rounded-full border border-line px-6 py-3 font-semibold">
             Mais testes
           </Link>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div className="rounded-3xl bg-surface border border-line p-6 md:p-8">
+    <Card padding={6}>
       <div className="flex justify-between text-sm text-muted">
         <span>Pergunta {i + 1} de {total}</span>
         <span>Pontos: {pontos}</span>
@@ -112,11 +112,13 @@ export default function Quiz({ teste }: { teste: Teste }) {
       {escolha !== null && (
         <div className="mt-6">
           {p.explicacao && <p className="text-muted mb-4">💡 {p.explicacao}</p>}
-          <button onClick={seguinte} className="rounded-full bg-accent text-background font-bold px-8 py-3 cursor-pointer">
-            {i + 1 >= total ? "Ver resultado" : "Seguinte →"}
-          </button>
+          <Button
+            label={i + 1 >= total ? "Ver resultado" : "Seguinte"}
+            variant="primary"
+            onClick={seguinte}
+          />
         </div>
       )}
-    </div>
+    </Card>
   );
 }

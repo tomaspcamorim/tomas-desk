@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MapPin } from "lucide-react";
+import { MapPin, Trophy } from "lucide-react";
 import Emblema from "./Emblema";
 import { NOSSA_EQUIPA } from "@/lib/clubes";
 import { diasSemana } from "@/lib/data";
@@ -31,54 +31,29 @@ export default function ProximoJogo({ jogos }: { jogos: Jogo[] }) {
   }
 
   return (
-    <section
-      className="entra d3 relative overflow-hidden rounded-[1.75rem] p-6 land:p-4 flex flex-col gap-4 land:gap-3 shrink-0"
-      style={{ background: "linear-gradient(160deg,#1e4a30,#0f2a1c 70%)", border: "1px solid #2a5a3d" }}
-    >
-      <svg aria-hidden viewBox="0 0 400 400" className="absolute -right-16 top-1/2 -translate-y-1/2 w-72 max-w-none opacity-[0.10]" fill="none" stroke="#eef3ea" strokeWidth="3">
-        <circle cx="200" cy="200" r="120" />
-        <circle cx="200" cy="200" r="6" fill="#eef3ea" />
-        <line x1="0" y1="200" x2="400" y2="200" />
-      </svg>
-
-      <div className="relative flex items-center justify-between gap-3">
-        <p className="etiqueta !text-accent flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent pulsa" /> Próximo jogo
-        </p>
-        {jogo && (
-          <span className="etiqueta rounded-full bg-background/50 px-2.5 py-0.5 !text-foreground">
-            {jogo.casa ? "Casa" : "Fora"}
-          </span>
-        )}
-      </div>
-
-      <div className="relative flex items-center gap-4">
-        {jogo && (
-          <div className="flex items-center gap-1 shrink-0">
-            <Emblema clube={NOSSA_EQUIPA} tamanho={44} />
-            <Emblema clube={jogo.adversario} tamanho={44} />
-          </div>
-        )}
-        <div className="min-w-0">
-          <h2 className="display text-4xl land:text-[clamp(1.75rem,4.2vh,2.4rem)] leading-[0.95] truncate">
-            {jogo ? jogo.adversario : agora ? "Sem jogos marcados" : "A carregar…"}
-          </h2>
-          {jogo && (
-            <p className="mt-1 text-sm text-foreground/80 flex items-center gap-1.5 min-w-0">
-              <MapPin size={14} className="shrink-0" />
-              <span className="truncate">{dataTxt} · {jogo.local}</span>
-            </p>
-          )}
+    <section className="match-panel">
+      <div className="pitch-lines" aria-hidden><span /></div>
+      <div className="match-content">
+        <div className="panel-heading">
+          <h2><Trophy size={19} aria-hidden /> Próximo jogo</h2>
+          {jogo && <span className="match-venue">{jogo.casa ? "Casa" : "Fora"}</span>}
         </div>
-      </div>
-
-      <div className="relative flex gap-5 items-end border-t border-white/10 pt-3">
-        {[[f(dias), "dias"], [f(horas), "horas"], [f(mins), "min"]].map(([n, l]) => (
-          <div key={l} className="flex items-baseline gap-1.5">
-            <span className="num text-5xl land:text-[clamp(2rem,5.5vh,3rem)] leading-none">{n}</span>
-            <span className="etiqueta">{l}</span>
-          </div>
-        ))}
+        <div className="match-teams">
+          <span className="match-crest"><Emblema clube={NOSSA_EQUIPA} tamanho={44} /></span>
+          {jogo && <>
+            <span className="match-versus">vs.</span>
+            <span className="match-crest"><Emblema clube={jogo.adversario} tamanho={44} /></span>
+          </>}
+        </div>
+        <p className="match-title">{jogo ? jogo.adversario : agora ? "Sem jogos marcados" : "A carregar…"}</p>
+        <p className="match-detail">
+          {jogo ? <><MapPin size={15} aria-hidden /> {dataTxt} · {jogo.local}</> : "Leixões SC · Sub-13 B"}
+        </p>
+        {jogo && <div className="match-countdown" aria-label="Tempo até ao jogo">
+          {[[f(dias), "dias"], [f(horas), "horas"], [f(mins), "min"]].map(([n, l]) => (
+            <span key={l}><strong>{n}</strong> {l}</span>
+          ))}
+        </div>}
       </div>
     </section>
   );

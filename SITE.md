@@ -8,9 +8,8 @@
 - **Objetivo:** ser a página inicial do Chrome e um sítio de treino para a escola.
 
 ## Visual
-- Layout em cartões (estilo "bento"), fundo verde-escuro de relvado, um destaque verde-lima e laranja só para jogos.
-- Ícones limpos (lucide-react) em vez de emojis; cada disciplina e tipo de atividade tem a sua cor.
-- Letras: Barlow Condensed (títulos e números, estilo desportivo) e Outfit (texto).
+- Tema Neutral do Astryx, com tipografia Figtree, superfícies claras e verde para destacar a navegação e o próximo jogo.
+- Os editores de impressão 3D usam a variante escura do tema Neutral, com a mesma tipografia e estilos de campos do painel.
 
 ## Páginas
 - **Início** (`/`) – saudação com hora, pesquisa, horário da semana, próximos jogos, testes e atalhos.
@@ -20,7 +19,7 @@
 
 ## Onde mudar as coisas
 Tudo está num só ficheiro: `lib/data.ts`
-- **Horário semanal** (`horarioSemanal`) – treinos do LSC já estão certos (Seg e Qui 19:00–20:15 no Oscar Marques; Ter e Qua 19:00–20:00 em Perafita). O horário da escola (08:30) ainda é um EXEMPLO.
+- **Horário semanal** (`horarioSemanal`) – treinos do LSC já estão certos (Seg e Qui 19:00–20:15 no Oscar Marques; Ter e Qua 19:00–20:00 em Perafita). O horário da escola (EBS Carolina Michaëlis) está completo, com sala e hora de cada aula.
 - **Jogos** – vêm sozinhos do calendário do Google da equipa (Leixões Sub13 B). Basta adicionar ou alterar o jogo no calendário; a página atualiza em até 15 minutos. Ficheiro: `lib/calendario.ts`.
 - **Atalhos** (`atalhos`)
 - **Testes** (`testes`) – copiar um bloco para criar um teste novo.
@@ -33,6 +32,9 @@ Chrome → Definições → "Ao iniciar" → "Abrir uma página específica" →
 Coloca os ficheiros em `public/clubes/` (ver `LEIA-ME.txt` lá dentro para os nomes). Enquanto faltarem, aparece um círculo com as iniciais.
 
 ## Alterações recentes
+- 2026-11-27: Aplicado o sistema de design Astryx ao painel, calendário, testes, biblioteca e editores 3D.
+- 2026-11-27: Novo painel com horário em destaque, navegação partilhada e disposição adaptada a ecrãs pequenos.
+- 2026-11-27: Horário real da escola (aulas, horas e salas, de segunda a sexta), lido da foto.
 - 2026-11-27: Adicionados 10 emblemas em `public/clubes/`. Falta só o do Leça FC (`leca-fc.png`).
 - 2026-11-27: Preparada a página para emblemas de clubes (com iniciais enquanto não houver ficheiros).
 - 2026-11-27: Jogos, contagem decrescente, próximos jogos e resultados ligados ao calendário do Google (Leixões Sub13 B). Jogos aparecem também no horário do dia certo da semana.

@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@astryxdesign/core/Button";
+import { Card } from "@astryxdesign/core/Card";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, Trophy } from "lucide-react";
@@ -35,24 +37,23 @@ export default function HubTestes() {
           [`${feitos}/${testes.length}`, "já experimentados"],
           [String(perfeitos), "com nota máxima"],
         ].map(([n, l]) => (
-          <div key={l} className="cartao px-6 py-5">
+          <Card key={l} padding={5}>
             <div className="num text-5xl leading-none text-accent">{n}</div>
             <div className="etiqueta mt-2">{l}</div>
-          </div>
+          </Card>
         ))}
       </div>
 
       <div className="mt-8 flex flex-wrap gap-2">
         {disciplinas.map((d) => (
-          <button
+          <Button
             key={d}
+            label={d}
+            size="sm"
             onClick={() => setFiltro(d)}
-            className={`rounded-full px-4 py-2 text-sm font-semibold transition cursor-pointer ${
-              filtro === d ? "bg-accent text-background" : "bg-surface-2 text-muted hover:text-foreground border border-line"
-            }`}
-          >
-            {d}
-          </button>
+            aria-pressed={filtro === d}
+            variant={filtro === d ? "primary" : "secondary"}
+          />
         ))}
       </div>
 
@@ -68,7 +69,7 @@ export default function HubTestes() {
               style={{ ["--c" as string]: t.cor }}
             >
               <div className="flex items-start justify-between">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl" style={{ background: t.cor + "22", color: t.cor }}>
+                <span className="subject-icon !size-14">
                   <Icone nome={t.icone} size={28} />
                 </span>
                 {rec === total ? (
@@ -78,13 +79,13 @@ export default function HubTestes() {
                 )}
               </div>
               <div>
-                <div className="etiqueta !text-[0.65rem]" style={{ color: t.cor }}>{t.disciplina}</div>
+                <div className="etiqueta !text-[0.65rem] !text-[var(--subject-ink)]">{t.disciplina}</div>
                 <h3 className="display text-3xl leading-[0.95] mt-1.5">{t.titulo}</h3>
               </div>
               <div className="mt-auto">
                 <div className="flex gap-1">
                   {t.perguntas.map((_, i) => (
-                    <span key={i} className="h-1.5 flex-1 rounded-full" style={{ background: rec !== undefined && i < rec ? t.cor : "var(--line)" }} />
+                    <span key={i} className="h-1.5 flex-1 rounded-full" style={{ background: rec !== undefined && i < rec ? "var(--subject-ink)" : "var(--line)" }} />
                   ))}
                 </div>
                 <div className="mt-2 flex justify-between text-sm text-muted">
