@@ -1,0 +1,16 @@
+Põe aqui os emblemas dos clubes (PNG com fundo transparente, ou SVG).
+Nomes dos ficheiros (a extensão pode ser .png, .svg ou .webp):
+
+leixoes          (a nossa equipa)
+padroense
+aldeia-nova
+infesta
+custoias
+leca-fc
+leca-balio
+lavrense
+senhora-da-hora
+rio-ave
+varzim
+
+Enquanto um ficheiro não existir, a página mostra um círculo com as iniciais.
