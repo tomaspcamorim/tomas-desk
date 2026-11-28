@@ -8,13 +8,13 @@ const ferramentas = [
   {
     nome: "Porta-chaves de camisola",
     descricao: "Personaliza o equipamento, o nome e o número. Cria uma camisola ou prepara um lote para a equipa.",
-    url: "/modelos-3d/jersey-keychain/jersey-keychain-maker.html",
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/modelos-3d/jersey-keychain/jersey-keychain-maker.html`,
     Icone: Shirt,
   },
   {
     nome: "Árvore de nomes",
     descricao: "Junta os nomes da família numa árvore e escolhe o tamanho para imprimir.",
-    url: "/modelos-3d/name-tree/name-tree-maker.html",
+    url: `${process.env.NEXT_PUBLIC_BASE_PATH}/modelos-3d/name-tree/name-tree-maker.html`,
     Icone: TreePine,
   },
 ];
