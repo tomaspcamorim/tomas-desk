@@ -24,7 +24,7 @@ export default function Emblema({ clube, tamanho = 48 }: { clube: string; tamanh
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={`/clubes/${slug}.${exts[i]}`}
+      src={`${process.env.NEXT_PUBLIC_BASE_PATH}/clubes/${slug}.${exts[i]}`}
       alt={clube}
       width={tamanho}
       height={tamanho}
